@@ -1,7 +1,7 @@
 <template >
   <div class="conactus">
     <h1>This is an conactus page</h1>
-     <img :src="require('../assets/images/p15.jpg')"
+     <img :src="'/images/p15.jpg'"
        class="my-3"
           contain
           height="400">

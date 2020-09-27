@@ -2,96 +2,93 @@
   
 
 <template>
- 
-  <v-app >
-    <v-toolbar app flat
-      color="#DEBEB9"
-      prominent
-      :src="require('./assets/images/toolbar.jpg')"
-      scroll-target="#scrolling-techniques-3"
-    >
-      <template v-slot:img="{ props }">
-        <v-img
-          v-bind="props"
-          
-          gradient="to top right,rgba(222, 190, 185, .7), rgba(241, 236, 205, .7)"
-        ></v-img>
-      </template>
-
-      <v-toolbar-title > 
-       <v-toolbar-side-icon ><img src="./assets/images/logo-3.png" ></v-toolbar-side-icon>
-      </v-toolbar-title>
-      <v-toolbar-title > 
-      <h1> Wedding venues</h1>
-     </v-toolbar-title>
+  <v-app class="grey">
+    <v-app-bar app flat color="#DEBEB9" :src="'/images/toolbar.jpg'">
+      <v-app-bar-nav-icon
+        @click.stop="drawer = !drawer"
+        class="d-md-none white--text"
+      ></v-app-bar-nav-icon>
+      <v-img contain max-width="60px" class="mb-2" src="/images/logo-3.png">
+      </v-img>
+      <span class="display-1 white--text mx-2"> Wedding venues</span>
       <v-spacer></v-spacer>
-      
-      <template v-slot:extension>
-        <v-tabs align-with-title  class="primary--text" color="#C0847A" >
-
-      <v-spacer></v-spacer>
-     
-         <v-tab>  <router-link to="/"><v-btn  flat color="#F1ECCD" >
-           
-                <v-icon >mdi-home</v-icon>
-            <span > Home</span>
-            
-                  </v-btn>
-                  </router-link>
-                </v-tab>
-       
-        <v-tab><router-link to="/services"><v-btn color="#F1ECCD">
-          <v-icon>mdi-heart</v-icon>
-            <span> Services</span>
-                </v-btn>
-                 </router-link>
-                </v-tab>
-
-        <v-tab><router-link to="/about"><v-btn color="#F1ECCD">
-          <v-icon> mdi-account-box</v-icon>
-          <span> About</span>
-            </v-btn>
-               </router-link>
-            </v-tab>
-
-        <v-tab><router-link to="/contactus"><v-btn color="#F1ECCD">
-          <v-icon>mdi-phone</v-icon>
-          <span> Contact us</span>
-             </v-btn> </router-link></v-tab>
-
-            </v-tabs>
-      </template>
-    </v-toolbar>
-   
-      <v-container style="height: 800px" >
-         <router-view/>
-
+      <div class="d-none d-md-block">
+        <v-btn
+          flat
+          color="#F1ECCD"
+          :to="link.link"
+          class="mx-1"
+          v-for="link in links"
+          :key="`btn` + link.link"
+        >
+          <v-icon left>{{ link.icon }}</v-icon>
+          <span> {{ link.title }}</span>
+        </v-btn>
+      </div>
+    </v-app-bar>
+    <v-navigation-drawer v-model="drawer" app>
+      <v-list nav dense>
+        <v-list-item
+          v-for="link in links"
+          :key="`list` + link.link"
+          :to="link.link"
+        >
+          <v-list-item-title>
+            {{ link.title }}
+          </v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+    <v-main class="white">
+      <v-container style="height: 800px" fluid class="pa-0">
+        <router-view />
+        <v-row no-gutters class="grey">
+          <v-col cols="12">
+            <div class="caption text-center white--text py-12">
+              Demo project by Nahla
+            </div>
+          </v-col>
+        </v-row>
       </v-container>
-   
- 
-     
-
-    <v-main>
-   
     </v-main>
   </v-app>
 </template>
 
 <script>
-
 export default {
-  name: 'App',
+  name: "App",
 
-  components: {
+  components: {},
+
+  data() {
+    return {
+      activeBtn: 1,
+      drawer: false,
+      links: [
+        {
+          title: "Home",
+          icon: "mdi-home",
+          link: "/",
+        },
+        {
+          title: "Services",
+          icon: "mdi-heart",
+          link: "/services",
+        },
+        {
+          title: "About",
+          icon: "mdi-account-box",
+          link: "/about",
+        },
+        {
+          title: "Contact Us",
+          icon: "mdi-phone",
+          link: "/contactus",
+        },
+      ],
+    };
   },
-
-
-  data () {
-      return {
-        activeBtn: 1,
-       
-      }
-    },}
+};
 </script>
 
 <style lang="scss">
@@ -114,9 +111,8 @@ export default {
       color: #42b983;
     }
   }
-  .btn{
+  .btn {
     margin: 30px;
   }
- 
 }
 </style>

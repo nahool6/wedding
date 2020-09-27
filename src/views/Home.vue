@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img :src="require('../assets/images/logo.png')"
+    <img :src="'/images/logo.png'"
        class="my-3"
           contain
           height="400">
