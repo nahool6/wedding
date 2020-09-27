@@ -20,7 +20,6 @@
 
       <v-toolbar-title > 
        <v-toolbar-side-icon ><img src="./assets/images/logo-3.png" ></v-toolbar-side-icon>
-
       </v-toolbar-title>
       <v-toolbar-title > 
       <h1> Wedding venues</h1>
